@@ -1,4 +1,4 @@
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from "recharts";
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 import Card from "../ui/Card";
 import { useApp } from "../../context/AppContext";
 import { getSpendingByCategory } from "../../utils/calculations";
@@ -87,11 +87,6 @@ export default function SpendingBreakdownChart() {
                 ))}
               </Pie>
               <Tooltip content={<CustomTooltip />} />
-            </PieChart>
-          </ResponsiveContainer>
-          <ResponsiveContainer width="100%" height={0}>
-            <PieChart>
-              <Legend content={<CustomLegend />} payload={data.map(d => ({ value: d.name, color: d.color, payload: d }))} />
             </PieChart>
           </ResponsiveContainer>
           <CustomLegend payload={data.map(d => ({ value: d.name, color: d.color, payload: d }))} />

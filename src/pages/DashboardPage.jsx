@@ -1,7 +1,6 @@
 import SummaryCards from "../components/dashboard/SummaryCards";
 import BalanceTrendChart from "../components/charts/BalanceTrendChart";
 import SpendingBreakdownChart from "../components/charts/SpendingBreakdownChart";
-import { useApp } from "../context/AppContext";
 import { useTransactions } from "../hooks/useTransactions";
 import { formatCurrency, formatDate } from "../utils/formatters";
 import Card from "../components/ui/Card";
@@ -59,31 +58,8 @@ function RecentTransactions() {
 }
 
 export default function DashboardPage() {
-  const { state } = useApp();
-  const now = new Date();
-  const greeting =
-    now.getHours() < 12 ? "Good morning" : now.getHours() < 18 ? "Good afternoon" : "Good evening";
-
   return (
     <div className="flex flex-col gap-6 max-w-7xl mx-auto">
-      {/* Welcome banner */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-2xl font-bold text-slate-800">
-            {greeting} 👋
-          </h2>
-          <p className="text-sm text-slate-400 mt-0.5">
-            {now.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}
-          </p>
-        </div>
-        {state.role === "admin" && (
-          <span className="hidden sm:inline-flex items-center gap-1.5 text-xs font-medium text-amber-700 bg-amber-50 border border-amber-200 px-3 py-1.5 rounded-full">
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
-            Admin Mode Active
-          </span>
-        )}
-      </div>
-
       {/* Summary cards */}
       <SummaryCards />
 

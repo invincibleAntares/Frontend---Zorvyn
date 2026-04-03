@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { LayoutDashboard, ArrowLeftRight, Lightbulb, ChevronDown, Wallet } from "lucide-react";
-import { useApp } from "../../context/AppContext";
+import { LayoutDashboard, ArrowLeftRight, Lightbulb, Wallet } from "lucide-react";
 
 const navLinks = [
   { to: "/", label: "Dashboard", icon: LayoutDashboard, end: true },
@@ -8,31 +7,21 @@ const navLinks = [
   { to: "/insights", label: "Insights", icon: Lightbulb },
 ];
 
-const roleOptions = [
-  { value: "viewer", label: "Viewer" },
-  { value: "admin", label: "Admin" },
-];
-
 export default function Sidebar() {
-  const { state, dispatch } = useApp();
-
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden md:flex flex-col w-64 shrink-0 bg-[#0f1117] min-h-screen px-4 py-6">
+      <aside className="hidden md:flex flex-col w-60 shrink-0 bg-white border-r border-slate-100 min-h-screen px-3 py-5">
         {/* Logo */}
-        <div className="flex items-center gap-2.5 px-2 mb-10">
-          <div className="flex items-center justify-center w-9 h-9 rounded-xl bg-violet-600 shadow-lg shadow-violet-900/50">
-            <Wallet size={18} className="text-white" />
+        <div className="flex items-center gap-2.5 px-3 mb-8">
+          <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-violet-600">
+            <Wallet size={16} className="text-white" />
           </div>
-          <span className="text-white font-bold text-lg tracking-tight">Zorvyn</span>
+          <span className="font-bold text-base text-slate-800 tracking-tight">Zorvyn</span>
         </div>
 
         {/* Nav */}
-        <nav className="flex flex-col gap-1 flex-1">
-          <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest px-3 mb-2">
-            Menu
-          </p>
+        <nav className="flex flex-col gap-0.5 flex-1">
           {navLinks.map(({ to, label, icon: Icon, end }) => (
             <NavLink
               key={to}
@@ -42,8 +31,8 @@ export default function Sidebar() {
                 `flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150
                 ${
                   isActive
-                    ? "bg-violet-600 text-white shadow-md shadow-violet-900/40"
-                    : "text-slate-400 hover:text-white hover:bg-white/5"
+                    ? "bg-violet-600 text-white shadow-sm"
+                    : "text-slate-500 hover:text-slate-800 hover:bg-slate-50"
                 }`
               }
             >
@@ -52,43 +41,10 @@ export default function Sidebar() {
             </NavLink>
           ))}
         </nav>
-
-        {/* Role switcher */}
-        <div className="mt-auto px-2">
-          <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-2">
-            Role
-          </p>
-          <div className="relative">
-            <select
-              value={state.role}
-              onChange={(e) => dispatch({ type: "SET_ROLE", payload: e.target.value })}
-              className="w-full appearance-none bg-white/5 border border-white/10 text-slate-300 text-sm
-                rounded-xl px-3 py-2.5 pr-8 cursor-pointer
-                focus:outline-none focus:ring-2 focus:ring-violet-500
-                transition-all"
-            >
-              {roleOptions.map((r) => (
-                <option key={r.value} value={r.value} className="bg-[#1a1d27] text-white">
-                  {r.label}
-                </option>
-              ))}
-            </select>
-            <ChevronDown
-              size={14}
-              className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-slate-500"
-            />
-          </div>
-          <div
-            className={`mt-2 text-center text-xs py-1.5 rounded-lg font-medium
-            ${state.role === "admin" ? "bg-amber-500/10 text-amber-400" : "bg-slate-700/50 text-slate-500"}`}
-          >
-            {state.role === "admin" ? "Admin — Full Access" : "Viewer — Read Only"}
-          </div>
-        </div>
       </aside>
 
       {/* Mobile bottom nav */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#0f1117] border-t border-white/10 flex">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-slate-100 flex">
         {navLinks.map(({ to, label, icon: Icon, end }) => (
           <NavLink
             key={to}
@@ -96,7 +52,7 @@ export default function Sidebar() {
             end={end}
             className={({ isActive }) =>
               `flex-1 flex flex-col items-center gap-1 py-3 text-xs font-medium transition-colors
-              ${isActive ? "text-violet-400" : "text-slate-500"}`
+              ${isActive ? "text-violet-600" : "text-slate-400"}`
             }
           >
             <Icon size={20} />
