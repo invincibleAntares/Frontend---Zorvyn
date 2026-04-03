@@ -2,8 +2,9 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AppProvider } from "./context/AppContext";
 import Layout from "./components/layout/Layout";
 import DashboardPage from "./pages/DashboardPage";
+import TransactionsPage from "./pages/TransactionsPage";
 
-// remaining pages – filled in steps 4-5
+// Insights page – filled in step 5
 function PlaceholderPage({ name }) {
   return (
     <div className="flex items-center justify-center h-64 text-slate-400 text-sm">
@@ -19,7 +20,7 @@ export default function App() {
         <Routes>
           <Route element={<Layout />}>
             <Route index element={<DashboardPage />} />
-            <Route path="transactions" element={<PlaceholderPage name="Transactions" />} />
+            <Route path="transactions" element={<TransactionsPage />} />
             <Route path="insights" element={<PlaceholderPage name="Insights" />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
